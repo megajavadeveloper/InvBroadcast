@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="InvBroadcast">
+    <output-path>$PROJECT_DIR$/out/artifacts/InvBroadcast</output-path>
+    <root id="archive" name="InvBroadcast.jar">
+      <element id="module-output" name="InvBroadcast" />
+    </root>
+  </artifact>
+</component>
