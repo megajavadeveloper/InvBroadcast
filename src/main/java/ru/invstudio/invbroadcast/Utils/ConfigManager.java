@@ -17,7 +17,4 @@ public class ConfigManager {
         this.config = plugin.getConfig();
     }
 
-    public static FileConfiguration getConfig() {
-        return config;
-    }
 }

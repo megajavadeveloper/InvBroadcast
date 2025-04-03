@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static ru.invstudio.invbroadcast.Utils.ColorManager.color;
+import static ru.invstudio.invbroadcast.Utils.ColorUtil.color;
 
 public class Commands implements CommandExecutor {
 

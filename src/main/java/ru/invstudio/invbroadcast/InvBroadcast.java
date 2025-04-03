@@ -1,8 +1,9 @@
 package ru.invstudio.invbroadcast;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.invstudio.invbroadcast.Utils.ColorManager;
 import ru.invstudio.invbroadcast.Utils.ConfigManager;
+
+import static ru.invstudio.invbroadcast.Utils.ColorUtil.color;
 
 public final class InvBroadcast extends JavaPlugin {
 
@@ -21,8 +22,8 @@ public final class InvBroadcast extends JavaPlugin {
         configManager = new ConfigManager(this);
         configManager.loadCfg();
 
-        getLogger().info(ColorManager.color("&b[InvBroadcast] Плагин успешно запущен!"));
-        getLogger().info(ColorManager.color("&b[InvBroadcast] t.me/invstudio"));
+        getLogger().info(color("&b[InvBroadcast] Плагин успешно запущен!"));
+        getLogger().info(color("&b[InvBroadcast] t.me/invstudio"));
     }
 
     public ConfigManager getConfigManager() {

@@ -7,16 +7,46 @@ import java.util.regex.Pattern;
 
 public class ColorUtil {
 
-    private static final Pattern hexPattern = Pattern.compile("#[a-fA-F0-9]{6}");
+    private static final Pattern HEX_PATTERN = Pattern.compile("&#([a-fA-F\\d]{6})");
+    public static final char COLOR_CHAR = '§';
 
-    public static String translateColorCodes(String textToTranslate) {
-        Matcher matcher = hexPattern.matcher(textToTranslate);
-        StringBuffer buffer = new StringBuffer();
+    public static String color(String message) {
+        if (message == null || message.isEmpty()) {
+            return message;
+        }
+
+        Matcher matcher = HEX_PATTERN.matcher(message);
+        StringBuffer buffer = new StringBuffer(message.length() + 32);
 
         while (matcher.find()) {
-            String hexColor = matcher.group();
-            matcher.appendReplacement(buffer, ChatColor.of(hexColor).toString());
+            String group = matcher.group(1);
+            matcher.appendReplacement(buffer, COLOR_CHAR + "x" +
+                    COLOR_CHAR + group.charAt(0) +
+                    COLOR_CHAR + group.charAt(1) +
+                    COLOR_CHAR + group.charAt(2) +
+                    COLOR_CHAR + group.charAt(3) +
+                    COLOR_CHAR + group.charAt(4) +
+                    COLOR_CHAR + group.charAt(5));
         }
-        return matcher.appendTail(buffer).toString();
+
+        matcher.appendTail(buffer);
+        return translateAlternateColorCodes('&', buffer.toString());
+    }
+
+    public static String translateAlternateColorCodes(char altColorChar, String textToTranslate) {
+        char[] b = textToTranslate.toCharArray();
+
+        for (int i = 0; i < b.length - 1; i++) {
+            if (b[i] == altColorChar && isValidColorCharacter(b[i + 1])) {
+                b[i] = COLOR_CHAR;
+                b[i + 1] |= 0x20;
+            }
+        }
+
+        return new String(b);
+    }
+
+    private static boolean isValidColorCharacter(char c) {
+        return "0123456789abcdefABCDEFkrx".indexOf(c) != -1 || c == 'r';
     }
 }
